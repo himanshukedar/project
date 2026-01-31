@@ -1,0 +1,94 @@
+.app-wrapper {
+  background-color: #0f172a;
+  min-height: 100vh;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-logo {
+  height: 32px;
+  width: auto;
+}
+
+.logo-text {
+  color: #f8fafc;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.ai-highlight {
+  background: linear-gradient(to right, #6366f1, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-dashboard-link {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s;
+}
+
+.nav-dashboard-link:hover, .nav-dashboard-link.active {
+  color: #6366f1;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-btn {
+  background: transparent;
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.signup-glow {
+  background: #6366f1;
+  border: none;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+}
+
+.signup-glow:hover {
+  background: #4f46e5;
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.5);
+}
+
+.page-content {
+  padding: 20px;
+}

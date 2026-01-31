@@ -1,5 +1,8 @@
 :root {
   --primary: #6366f1;
+  --accent-1: #7c3aed;
+  --accent-2: #06b6d4;
+  --glass: rgba(255,255,255,0.03);
   --primary-hover: #4f46e5;
   --bg-dark: #0f172a;
   --card-bg: rgba(255, 255, 255, 0.02);
@@ -26,12 +29,42 @@
 .dashboard-container {
   min-height: 100vh;
   background-color: var(--bg-dark);
-  background-image: 
-    radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, rgba(79, 70, 229, 0.05) 0px, transparent 50%);
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(0,255,255,0.14), transparent 12%),
+    radial-gradient(circle at 85% 75%, rgba(0,255,0,0.10), transparent 14%),
+    conic-gradient(from 120deg at 50% 50%, rgba(0,255,255,0.06), rgba(0,255,0,0.04)),
+    url('../assets/background.jpg');
+  background-size: 120% 120%, 140% 140%, 200% 200%, cover;
+  background-position: 0% 0%, 100% 100%, 50% 50%, center;
+  background-attachment: fixed;
   color: var(--text-main);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   overflow-x: hidden;
+  position: relative;
+  animation: bgShift 18s linear infinite;
+}
+
+.dashboard-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,255,255,0.03), rgba(0,255,0,0.02));
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+.dashboard-container::after {
+  /* subtle moving star/particle layer */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.95) 1px, transparent 1px), radial-gradient(rgba(255,255,255,0.85) 1px, transparent 1px);
+  background-size: 180px 180px, 420px 420px;
+  opacity: 0.06;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  transform: translateY(0);
+  animation: starsMove 60s linear infinite;
 }
 
 .dashboard-wrapper {
@@ -39,6 +72,7 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: var(--spacing-lg);
+  position: relative;
 }
 
 /* Hero Section */
@@ -69,6 +103,11 @@
   line-height: 1.1;
   margin-bottom: var(--spacing-md);
   letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--primary), var(--accent-1));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 6px 30px rgba(124,58,237,0.08);
 }
 
 .gradient-text {
@@ -87,19 +126,20 @@
 }
 
 .hero-content-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-2xl);
+  display: flex;
+  gap: var(--spacing-md);
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  justify-content: center;
+  width: 100%;
 }
 
 .hero-actions {
   display: flex;
   gap: var(--spacing-md);
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .primary-btn,
@@ -114,20 +154,21 @@
 }
 
 .primary-btn {
-  background: var(--primary);
+  background: linear-gradient(90deg, var(--primary), var(--accent-1));
   color: white;
+  box-shadow: 0 6px 30px rgba(99,102,241,0.18);
 }
 
 .primary-btn:hover {
-  background: var(--primary-hover);
-  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
-  transform: translateY(-3px);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 18px 50px rgba(99,102,241,0.18), 0 6px 20px rgba(124,58,237,0.12);
 }
 
 .outline-btn {
   background: transparent;
   color: var(--text-main);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
 }
 
 .outline-btn:hover {
@@ -137,13 +178,24 @@
 }
 
 .hero-chart-aside {
+  position: absolute;
+  top: 20px;
+  right: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  max-width: 500px;
+  max-width: 250px;
   height: auto;
-  min-height: 250px;
+  min-height: 280px;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: 0 12px 40px rgba(2,6,23,0.6), 0 0 40px rgba(124,58,237,0.06) inset;
+  animation: float 4s ease-in-out infinite;
 }
 
 .mini-chart-container {
@@ -203,10 +255,10 @@
 }
 
 .feature-card:hover {
-  background: var(--card-bg-hover);
-  border-color: rgba(99, 102, 241, 0.5);
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border-color: rgba(99, 102, 241, 0.35);
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 30px 60px rgba(2,6,23,0.6), 0 0 30px rgba(124,58,237,0.04) inset;
 }
 
 .feature-icon {
@@ -234,6 +286,19 @@
 .highlighted-card {
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
   border: 1px solid rgba(99, 102, 241, 0.25);
+}
+
+.feature-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.feature-card {
+  position: relative;
+  overflow: hidden;
 }
 
 .card-action {
@@ -307,6 +372,29 @@
   }
 }
 
+@keyframes float {
+  0% { transform: translateY(0) rotate(-0.2deg); }
+  50% { transform: translateY(-14px) rotate(0.2deg); }
+  100% { transform: translateY(0) rotate(-0.2deg); }
+}
+
+@keyframes bgShift {
+  0% {
+    background-position: 0% 0%, 100% 100%, 50% 50%, center;
+  }
+  50% {
+    background-position: 50% 30%, 50% 80%, 40% 60%, center;
+  }
+  100% {
+    background-position: 0% 0%, 100% 100%, 50% 50%, center;
+  }
+}
+
+@keyframes starsMove {
+  from { transform: translateY(0); }
+  to { transform: translateY(-1200px); }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -318,6 +406,27 @@
 
 .animate-fade-in {
   animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* subtle custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, rgba(124,58,237,0.18), rgba(6,182,212,0.12)); border-radius: 999px; }
+
+/* small sparkle on hero badge */
+.hero-badge::after {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-left: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff 0%, rgba(255,255,255,0) 40%), linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  box-shadow: 0 6px 18px rgba(0,255,255,0.14);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-chart-aside, .feature-card, .primary-btn { animation: none !important; transition: none !important; }
 }
 
 /* Responsive Design */

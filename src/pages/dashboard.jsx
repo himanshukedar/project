@@ -11,6 +11,9 @@ export default function Dashboard() {
     <div className="dashboard-container">
       {view === 'dashboard' ? (
         <div className="dashboard-wrapper animate-fade-in">
+          <div className="hero-chart-aside">
+            <SkillChart />
+          </div>
           <section className="hero-section">
             <div className="hero-badge">AI-Powered Career Guidance</div>
             <h1 className="hero-title">
@@ -24,9 +27,6 @@ export default function Dashboard() {
               <div className="hero-actions">
                 <button className="primary-btn">Start Your Analysis →</button>
                 <button className="outline-btn">Explore Courses</button>
-              </div>
-              <div className="hero-chart-aside">
-                <SkillChart />
               </div>
             </div>
           </section>
